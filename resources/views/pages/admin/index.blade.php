@@ -31,6 +31,9 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <a href="{{ route('barang.create') }}" class="btn btn-primary mb-2">Tambah Data</a>
+                    @if(session()->has('tambah'))
+                      <div class="alert alert-success">{{ session()->get('tambah') }}</div>
+                    @endif
                   <table id="example2" class="table table-bordered table-hover">
                     <thead>
                     <tr>
@@ -44,13 +47,16 @@
                     </thead>
                     <tbody>
 
-                        @forelse ($collection as $item)
+                        @foreach ($collection as $item)
                             <tr>
-                                <td></td>
-                        @empty
-                        <td>data kosong</td>
+                              <td>{{ $item->no_invoice }}</td>
+                              <td>{{ $item->nama_barang }}</td>
+                              <td>{{ $item->jenis_barang }}</td>
+                              <td>{{ $item->berat_barang }}</td>
+                              <td>{{ $item->warna_barang }}</td>
+                              <td><img src="{{ asset('storage/gambar/'.$item->gambar_barang) }}" width="150" alt=""></td>
                             </tr>
-                        @endforelse
+                        @endforeach
 
                     </tbody>
                   </table>
