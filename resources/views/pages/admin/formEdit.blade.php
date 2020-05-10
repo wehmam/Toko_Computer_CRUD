@@ -80,7 +80,10 @@
                             </div>
                             <label for="gambar_barang"  class="mx-2">Gambar</label>
                             <div class="form-group col-md-5 mt-5">
-                                <input type="file" name="gambar_barang" value="{{ $barang->gambar_barang }}" class="form-control-input @error('gambar_barang') is-invalid @enderror">
+                                <input type="file" name="gambar_barang" class="form-control-input @error('gambar_barang') is-invalid @enderror">
+                                
+                                    <img src="{{ asset('storage/gambar/'.$barang->gambar_barang) }}" width="100" alt="">
+                                
                                 @error('gambar_barang')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror

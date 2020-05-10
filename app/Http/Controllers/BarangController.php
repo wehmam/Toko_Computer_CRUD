@@ -26,7 +26,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        $jenis = ['barang 1','barang2','barang 3'];
+        $jenis = ['Pc','Laptop','Accecories Laptop','Memory External'];
         return view('pages.admin.formCreate',compact('jenis'));
     }
 
@@ -48,7 +48,6 @@ class BarangController extends Controller
         ]);
         $namafile = $request->gambar_barang->hashName();
         $file = $request->gambar_barang;
-        // $namaFoto =$request->no_invoice."_".$file->getClientOriginalName();
         $FotoLocation = 'public/gambar';
         $file->storeAs($FotoLocation,$namafile);
 
@@ -104,7 +103,7 @@ class BarangController extends Controller
             'jenis_barang' =>'required',
             'berat_barang' => 'required|max:10',
             'warna_barang' => 'required',
-            'gambar_barang' => 'image'
+            'gambar_barang' => 'image|file'
         ]);
 
         $barang->find($barang->barang_id)->update([
@@ -135,7 +134,7 @@ class BarangController extends Controller
     public function destroy(Barang $barang)
     {
         $barang->find($barang->barang_id)->delete();
-        
+
         Storage::delete('public/gambar/'.$barang->gambar_barang);
         return redirect()->route('barang.index')->with(['hapus' => "Data {$barang['nama_barang']} Berhasil Dihapus!"]);
     }

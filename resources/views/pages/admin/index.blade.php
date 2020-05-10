@@ -61,7 +61,7 @@
                               <td>{{ $item->warna_barang }}</td>
                               <td><img src="{{ asset('storage/gambar/'.$item->gambar_barang) }}" width="150" alt=""></td>
                               <td><a href="{{ route('barang.edit',$item->barang_id,'edit') }}" class="badge badge-success">Edit</a></td>
-                              <td rowspan="2">
+                              <td>
                                 <form action="{{ route('barang.destroy',$item->barang_id) }}" method="POST">
                                   @csrf
                                   @method('DELETE')
