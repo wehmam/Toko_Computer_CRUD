@@ -135,6 +135,7 @@ class BarangController extends Controller
     public function destroy(Barang $barang)
     {
         $barang->find($barang->barang_id)->delete();
+        
         Storage::delete('public/gambar/'.$barang->gambar_barang);
         return redirect()->route('barang.index')->with(['hapus' => "Data {$barang['nama_barang']} Berhasil Dihapus!"]);
     }
