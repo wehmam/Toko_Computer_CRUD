@@ -16,7 +16,7 @@ class BarangController extends Controller
     public function index()
     {
         $barang = Barang::all();
-        return view('pages.admin.index',['collection'=> $barang]);
+        return view('pages.admin.barang.index',['collection'=> $barang]);
     }
 
     /**
@@ -27,7 +27,7 @@ class BarangController extends Controller
     public function create()
     {
         $jenis = ['Pc','Laptop','Accecories Laptop','Memory External'];
-        return view('pages.admin.formCreate',compact('jenis'));
+        return view('pages.admin.barang.formCreate',compact('jenis'));
     }
 
     /**
@@ -85,7 +85,7 @@ class BarangController extends Controller
         $barang->find($barang->barang_id)::all();
 
         $jenis = ['barang 1','barang2','barang 3'];
-        return view('pages.admin.formEdit',compact('barang','jenis'));
+        return view('pages.admin.barang.formEdit',compact('barang','jenis'));
     }
 
     /**
