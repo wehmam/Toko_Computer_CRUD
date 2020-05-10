@@ -14,7 +14,8 @@ class NamaTokoController extends Controller
      */
     public function index()
     {
-        //
+        $toko = NamaToko::all();
+        return view('pages.admin.toko.index',['collection'=> $toko]);
     }
 
     /**
@@ -24,7 +25,7 @@ class NamaTokoController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.admin.toko.formCreate');
     }
 
     /**
@@ -35,7 +36,15 @@ class NamaTokoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $validate = $request->validate([
+            'nama_toko' => 'required|min:3',
+            'pemilik_toko' => 'required|min:3|string',
+            'no_izin_usaha' => 'required|max:15',
+            'alamat' => 'required'
+        ]);
+        NamaToko::create($validate);
+        $request->session()->flash('tambah',"Data {$validate['nama_toko']} Berhasil Ditambahkan");
+        return redirect()->route('toko.index');
     }
 
     /**
@@ -57,7 +66,8 @@ class NamaTokoController extends Controller
      */
     public function edit(NamaToko $namaToko)
     {
-        //
+        $namaToko->find($namaToko->id)::all();
+        return view('pages.admin.toko.formEdit',compact('namaToko'));
     }
 
     /**
