@@ -33,6 +33,10 @@
                     <a href="{{ route('barang.create') }}" class="btn btn-primary mb-2">Tambah Data</a>
                     @if(session()->has('tambah'))
                       <div class="alert alert-success">{{ session()->get('tambah') }}</div>
+                    @elseif(session()->has('edit'))
+                      <div class="alert alert-warning">{{ session()->get('edit') }}</div>
+                    @elseif(session()->has('hapus'))
+                      <div class="alert alert-danger">{{ session()->get('hapus') }}</div>
                     @endif
                   <table id="example2" class="table table-bordered table-hover">
                     <thead>
@@ -43,6 +47,7 @@
                       <th>Berat Barang</th>
                       <th>Warna</th>
                       <th>Gambar</th>
+                      <th colspan="2" class="text-center">Action</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -55,6 +60,14 @@
                               <td>{{ $item->berat_barang }}</td>
                               <td>{{ $item->warna_barang }}</td>
                               <td><img src="{{ asset('storage/gambar/'.$item->gambar_barang) }}" width="150" alt=""></td>
+                              <td><a href="{{ route('barang.edit',$item->barang_id,'edit') }}" class="badge badge-success">Edit</a></td>
+                              <td rowspan="2">
+                                <form action="{{ route('barang.destroy',$item->barang_id) }}" method="POST">
+                                  @csrf
+                                  @method('DELETE')
+                                  <button type="submit" class="badge badge-danger" onclick="return confirm('Yakin Ingin menghapus {{ $item->nama_barang }} ?')">Delete</button>
+                                </form>
+                              </td>
                             </tr>
                         @endforeach
 
