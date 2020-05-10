@@ -1,5 +1,6 @@
 @extends('layout.master')
 @section('title','home')
+@section('toko','active')
 @section('konten')
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -58,10 +59,10 @@
                               <td>{{ $item->alamat }}</td>
                               <td><a href="{{ route('toko.edit',$item->id,'edit') }}" class="badge badge-success">Edit</a></td>
                               <td>
-                                <form action="{{ route('barang.destroy',$item->id) }}" method="POST">
+                                <form action="{{ route('toko.destroy',$item->id) }}" method="POST">
                                   @csrf
                                   @method('DELETE')
-                                  <button type="submit" class="badge badge-danger" onclick="return confirm('Yakin Ingin menghapus {{ $item->nama_barang }} ?')">Delete</button>
+                                  <button type="submit" class="badge badge-danger" onclick="return confirm('Yakin Ingin menghapus {{ $item->nama_toko }} ?')">Delete</button>
                                 </form>
                               </td>
                             </tr>

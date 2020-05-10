@@ -33,23 +33,23 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('barang.index') }}" class="nav-link @yield('barang')">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>data 1</p>
+                  <p>Barang</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="{{ route('toko.index') }}" class="nav-link @yield('toko')">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Data 2</p>
+                  <p>Toko</p>
                 </a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a href="#" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Data 3</p>
                 </a>
-              </li>
+              </li> --}}
             </ul>
           </li>
         </ul>

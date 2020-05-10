@@ -15,7 +15,7 @@ class NamaTokoController extends Controller
     public function index()
     {
         $toko = NamaToko::all();
-        return view('pages.admin.toko.index',['collection'=> $toko]);
+        return view('pages.admin.toko.index',['collection' =>$toko]);
     }
 
     /**
@@ -36,14 +36,14 @@ class NamaTokoController extends Controller
      */
     public function store(Request $request)
     {
-       $validate = $request->validate([
-            'nama_toko' => 'required|min:3',
-            'pemilik_toko' => 'required|min:3|string',
-            'no_izin_usaha' => 'required|max:15',
+      $validate = $request->validate([
+            'nama_toko' => 'required',
+            'pemilik_toko' => 'required',
+            'no_izin_usaha' => 'required',
             'alamat' => 'required'
         ]);
         NamaToko::create($validate);
-        $request->session()->flash('tambah',"Data {$validate['nama_toko']} Berhasil Ditambahkan");
+        $request->session()->flash('tambah',"Data {$request->nama_toko} Berhasil disimpan");
         return redirect()->route('toko.index');
     }
 
@@ -64,9 +64,9 @@ class NamaTokoController extends Controller
      * @param  \App\NamaToko  $namaToko
      * @return \Illuminate\Http\Response
      */
-    public function edit(NamaToko $namaToko)
+    public function edit(NamaToko $namaToko,$id)
     {
-        $namaToko->find($namaToko->id)::all();
+        $namaToko = NamaToko::find($id);
         return view('pages.admin.toko.formEdit',compact('namaToko'));
     }
 
@@ -77,9 +77,21 @@ class NamaTokoController extends Controller
      * @param  \App\NamaToko  $namaToko
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, NamaToko $namaToko)
+    public function update(Request $request, NamaToko $namaToko,$id)
     {
-        //
+        $validatedData = $request->validate([
+            
+            'nama_toko' => 'required',
+            'pemilik_toko' => 'required',
+            'no_izin_usaha' => 'required',
+            'alamat' => 'required',
+            // 'alamat' => '',
+            
+        ]);
+        $toko = $namaToko::find($id)->update($validatedData);
+        // dd($toko);
+        $request->session()->flash('edit',"Data {$request->nama_toko} Berhasil disimpan");
+        return redirect()->route('toko.index');
     }
 
     /**
@@ -88,8 +100,9 @@ class NamaTokoController extends Controller
      * @param  \App\NamaToko  $namaToko
      * @return \Illuminate\Http\Response
      */
-    public function destroy(NamaToko $namaToko)
+    public function destroy(NamaToko $namaToko,$id)
     {
-        //
+        $namaToko::find($id)->delete();
+        return redirect()->route('toko.index')->with(['hapus'=> "Data {$namaToko->nama_toko} berhasil Dihapus!"]);
     }
 }

@@ -26,7 +26,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        $jenis = ['Pc','Laptop','Accecories Laptop','Memory External'];
+        $jenis = ['Pc','Laptop','Accecories Laptop','Memory External','Handphone'];
         return view('pages.admin.barang.formCreate',compact('jenis'));
     }
 
@@ -84,7 +84,7 @@ class BarangController extends Controller
     {
         $barang->find($barang->barang_id)::all();
 
-        $jenis = ['barang 1','barang2','barang 3'];
+        $jenis = ['Pc','Laptop','Accecories Laptop','Memory External','Handphone'];
         return view('pages.admin.barang.formEdit',compact('barang','jenis'));
     }
 
@@ -139,3 +139,5 @@ class BarangController extends Controller
         return redirect()->route('barang.index')->with(['hapus' => "Data {$barang['nama_barang']} Berhasil Dihapus!"]);
     }
 }
+
+

@@ -25,19 +25,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <form action="{{ route('toko.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('toko.update',$namaToko->id) }}" method="POST">
                         @csrf
+                        @method('PUT')
                         <div class="form-row">
                             <div class="form-group col-md-6 offset-3">
                                 <label for="nama_toko">Nama Toko</label>
-                                <input type="text" value="{{ old('nama_toko') }}" class="form-control @error('nama_toko') is-invalid @enderror" value="{{ old('nama_toko') }}" name="nama_toko" id="nama_toko">
+                                <input type="text" value="{{ $namaToko->nama_toko }}" class="form-control @error('nama_toko') is-invalid @enderror" value="{{ old('nama_toko') }}" name="nama_toko" id="nama_toko">
                                 @error('nama_toko')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
                             </div>
                             <div class="form-group col-md-6 offset-3">
                                 <label for="pemilik_toko">Pemilik</label>
-                                <input type="text" value="{{ old('pemilik_toko') }}" class="form-control @error('pemilik_toko') is-invalid @enderror" value="{{ old('pemilik_toko') }}" name="pemilik_toko" id="pemilik_toko">
+                                <input type="text" value="{{ $namaToko->pemilik_toko }}" class="form-control @error('pemilik_toko') is-invalid @enderror" value="{{ old('pemilik_toko') }}" name="pemilik_toko" id="pemilik_toko">
                                 @error('pemilik_toko')
                                     <div class="text-danger">{{ $message }}</div>
                                 @enderror
@@ -46,14 +47,14 @@
                     <div class="form-row">
                         <div class="form-group col-md-6 offset-3 mr-5">
                             <label for="no_izin_usaha">	No Izin usaha</label>
-                            <input type="text" name="no_izin_usaha" id="no_izin_usaha" value="{{ old('no_izin_usaha') }}" class="form-control @error('no_izin_usaha') is-invalid @enderror">
+                            <input type="text" name="no_izin_usaha" id="no_izin_usaha" value="{{ $namaToko->no_izin_usaha }}" class="form-control @error('no_izin_usaha') is-invalid @enderror">
                             @error('no_izin_usaha')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
                         </div>
                         <div class="form-group col-md-6 offset-3">
                             <label for="alamat">Alamat</label>
-                            <textarea name="alamat" id="alamat" class="form-control" cols="10" rows="5" >{{ old('alamat') }}</textarea>
+                            <textarea name="alamat" id="alamat" class="form-control" cols="10" rows="5" >{{ $namaToko->alamat }}</textarea>
                             @error('alamat')
                                 <div class="text-danger">{{ $message }}</div>
                             @enderror
